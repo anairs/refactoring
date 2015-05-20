@@ -5,7 +5,6 @@ package com.anup.chap1
  */
 class Customer(_name:String, _rentals:Vector[Rental]) {
   def statements:String = {
-    var totalAmount:Double = 0
     var frequentRenterPoints:Int = 0
     var result:String = s"Rental Record for ${_name} \n"
     _rentals.foreach(
@@ -14,12 +13,15 @@ class Customer(_name:String, _rentals:Vector[Rental]) {
 
         // show results
         result += s"\t ${rental._movie._title}\t${rental.getCharge()}"
-        totalAmount += rental.getCharge()
       }
     )
 
-    result += s"Amount owed is ${totalAmount} \n"
+    result += s"Amount owed is ${getTotalCharge()} \n"
     result += s"You earned ${frequentRenterPoints} frequent renter points\n"
     result
+  }
+
+  private def getTotalCharge() : Double = {
+    _rentals.map(_.getCharge()).sum
   }
 }
