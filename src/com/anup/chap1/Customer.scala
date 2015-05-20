@@ -10,22 +10,7 @@ class Customer(_name:String, _rentals:Vector[Rental]) {
     var result:String = s"Rental Record for ${_name} \n"
     _rentals.foreach(
       rental => {
-        var thisAmount:Double = 0
-        rental._movie._priceCode match {
-          case Movie.REGULAR =>
-            thisAmount += 2
-            if(rental._daysRented > 2)
-              thisAmount += (rental._daysRented - 2) * 1.5
-
-          case Movie.NEW_RELEASE =>
-            thisAmount += 2
-            thisAmount += rental._daysRented * 3
-
-          case Movie.CHILDRENS =>
-            thisAmount += 2
-            if(rental._daysRented > 3)
-              thisAmount += (rental._daysRented -32) * 1.5
-        }
+        var thisAmount: Double = amountFor(rental)
 
         frequentRenterPoints += 1
 
@@ -41,5 +26,25 @@ class Customer(_name:String, _rentals:Vector[Rental]) {
     result += s"Amount owed is ${totalAmount} \n"
     result += s"You earned ${frequentRenterPoints} frequent renter points\n"
     result
+  }
+
+  private def amountFor(rental: Rental): Double = {
+    var thisAmount: Double = 0
+    rental._movie._priceCode match {
+      case Movie.REGULAR =>
+        thisAmount += 2
+        if (rental._daysRented > 2)
+          thisAmount += (rental._daysRented - 2) * 1.5
+
+      case Movie.NEW_RELEASE =>
+        thisAmount += 2
+        thisAmount += rental._daysRented * 3
+
+      case Movie.CHILDRENS =>
+        thisAmount += 2
+        if (rental._daysRented > 3)
+          thisAmount += (rental._daysRented - 32) * 1.5
+    }
+    thisAmount
   }
 }
