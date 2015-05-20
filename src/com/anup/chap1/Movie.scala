@@ -23,6 +23,12 @@ class Movie (val _title:String, val _priceCode:Int){
     }
     thisAmount
   }
+
+  def getFrequenterRenterPoints(daysRented:Int): Int = {
+    if(_priceCode == Movie.NEW_RELEASE && daysRented > 1)
+      2
+    else 1
+  }
 }
 
 object Movie {

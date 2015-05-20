@@ -9,9 +9,7 @@ class Rental(val _movie:Movie, val _daysRented:Int) {
   }
   
   def getFrequentRenterPoints() : Int = {
-    if(_movie._priceCode == Movie.NEW_RELEASE && _daysRented > 1)
-      2
-    else 1
+    _movie.getFrequenterRenterPoints(_daysRented)
   }
 
 }
