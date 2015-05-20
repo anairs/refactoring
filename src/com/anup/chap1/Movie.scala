@@ -4,6 +4,13 @@ package com.anup.chap1
  * Created by anup on 20/05/15.
  */
 class Movie (val _title:String, val _priceCode:Int){
+  val _price:Price =  priceCode match {
+    case Movie.REGULAR => RegularPrice
+    case Movie.NEW_RELEASE => NewReleasePrice
+    case Movie.CHILDRENS => ChildrensPrice
+  }
+
+
   def getCharge(daysRented:Int): Double = {
     var thisAmount: Double = 0
     _priceCode match {
