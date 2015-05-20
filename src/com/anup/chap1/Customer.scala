@@ -10,16 +10,14 @@ class Customer(_name:String, _rentals:Vector[Rental]) {
     var result:String = s"Rental Record for ${_name} \n"
     _rentals.foreach(
       rental => {
-        var thisAmount: Double = rental.getCharge()
-
         frequentRenterPoints += 1
 
         if(rental._movie._priceCode == Movie.NEW_RELEASE && rental._daysRented > 1)
           frequentRenterPoints += 1
 
         // show results
-        result += s"\t ${rental._movie._title}\t${thisAmount}"
-        totalAmount += thisAmount
+        result += s"\t ${rental._movie._title}\t${rental.getCharge()}"
+        totalAmount += rental.getCharge()
       }
     )
 
